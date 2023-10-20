@@ -1,4 +1,10 @@
 {
+  "name": "back-music",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.4.2",
     "cors": "^2.8.5",
