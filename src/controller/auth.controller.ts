@@ -25,4 +25,8 @@ const login = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send({ token });
 };
 
-module.exports = { login };
+const me = async (req: Request, res: Response): Promise<Response> => {
+  return res.sendStatus(200);
+};
+
+module.exports = { login, me };
