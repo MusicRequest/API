@@ -40,7 +40,9 @@ const post = async (req: Request, res: Response) => {
 
   try {
     const event = await db[ENTITY].create({
-      ...req.body,
+      data: {
+        ...req.body,
+      },
     });
 
     return res.json(event).status(201);
