@@ -7,7 +7,10 @@ import logger from "../utils/logger";
 const login = async (req: Request, res: Response): Promise<Response> => {
   const { username, password } = req.body;
 
-  if (!username || !password) return res.sendStatus(403);
+  if (!username || !password || username !== "admin") {
+    return res.sendStatus(403);
+  }
+
   if (!process.env.admin || !process.env.ACCESS_TOKEN_SECRET_KEY) {
     logger.error("Variable d'environement manquante (Mot de passe admin)");
     return res.sendStatus(500);
@@ -26,7 +29,7 @@ const login = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const me = async (req: Request, res: Response): Promise<Response> => {
-  return res.sendStatus(200);
+  return res.status(200).send({ status: "ok" });
 };
 
 module.exports = { login, me };
