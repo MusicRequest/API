@@ -48,7 +48,7 @@ const post = async (req: Request, res: Response) => {
     return res.json(event).status(201);
   } catch (e) {
     logger.error("Une erreur c'est produite");
-    throw new Error("Error...");
+    return res.json({ status: "Une Erreur est survenue" }).status(500);
   }
 };
 
@@ -68,7 +68,7 @@ const put = async (req: Request, res: Response) => {
     return res.json(event).status(202);
   } catch (e) {
     logger.error("Une erreur c'est produite");
-    throw new Error("Error...");
+    return res.json({ status: "Une Erreur est survenue" }).status(500);
   }
 };
 
@@ -85,7 +85,7 @@ const remove = async (req: Request, res: Response) => {
     return res.status(204);
   } catch (e) {
     logger.error("Une erreur c'est produite");
-    throw new Error("Error...");
+    return res.json({ status: "Une Erreur est survenue" }).status(500);
   }
 };
 
