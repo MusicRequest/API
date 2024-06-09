@@ -1,10 +1,11 @@
 import { Response, Router, Request } from "express";
 
 const router: Router = require("express").Router();
-const authController = require("../controller/auth.controller");
 import verifyJWT from "../middleware/verifyJWT";
 
-router.post("/login", authController.login);
-router.get("/me", verifyJWT, authController.me);
+import { login, me } from "../controller/auth.controller";
+
+router.post("/login", login);
+router.get("/me", verifyJWT, me);
 
 module.exports = router;

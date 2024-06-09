@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { compare } from "bcrypt";
+import { sign } from "jsonwebtoken";
 
 import logger from "../utils/logger";
 
-const login = async (req: Request, res: Response): Promise<Response> => {
+export const login = async (req: Request, res: Response): Promise<Response> => {
   const { username, password } = req.body;
 
   if (!username || !password || username !== "admin") {
@@ -16,20 +16,21 @@ const login = async (req: Request, res: Response): Promise<Response> => {
     return res.sendStatus(500);
   }
 
-  const match = await bcrypt.compare(password, process.env.admin);
+  const match = await compare(password, process.env.admin);
 
   if (!match) {
     return res.status(403).send({ error: "Mot de passe incorrect" });
   }
 
-  const token = jwt.sign({}, process.env.ACCESS_TOKEN_SECRET_KEY, {
+  const token = sign({}, process.env.ACCESS_TOKEN_SECRET_KEY, {
     expiresIn: "30d",
   });
+
+  logger.info("Connection d'un admin");
+
   return res.status(200).send({ token });
 };
 
-const me = async (req: Request, res: Response): Promise<Response> => {
+export const me = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send({ status: "ok" });
 };
-
-module.exports = { login, me };
