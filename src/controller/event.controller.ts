@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { db } from "../utils/db.server";
 import logger from "../utils/logger";
 

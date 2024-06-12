@@ -22,7 +22,7 @@ export default function verifyJWT(
   verify(
     token.replace("Bearer ", ""),
     process.env.ACCESS_TOKEN_SECRET_KEY,
-    (err, decoded) => {
+    (err) => {
       if (err) {
         return res.status(401).json({
           auth: false,
