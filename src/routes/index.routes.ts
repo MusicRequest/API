@@ -8,6 +8,6 @@ const router: Router = require("express").Router();
 
 router.use("/events", eventRouter);
 router.use("/auth", authRouter);
-router.use("/visitor", visitorRouter);
+router.use("/visitors", visitorRouter);
 
 module.exports = router;

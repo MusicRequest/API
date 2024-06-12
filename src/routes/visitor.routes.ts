@@ -1,15 +1,21 @@
 import { Router } from "express";
+import {
+  post,
+  verify,
+  getFromEvent,
+  put,
+} from "../controller/visitor.controller";
+import verifyJWT from "../middleware/verifyJWT";
 
 const router: Router = require("express").Router();
-const visitorController = require("../controller/visitor.controller");
 
 // router.get("/", templateRouter.getAll);
-// router.get("/:id", templateRouter.getById);
-router.post("/", visitorController.post);
-// router.put("/:id", templateRouter.put);
+router.get("/:eventId", verifyJWT, getFromEvent);
+router.post("/", post);
+router.put("/:id", put);
 // router.delete("/:id", templateRouter.remove);
 
 // Spécific Route
-router.get("/:id/verify/:eventId", visitorController.verify);
+router.get("/:id/verify/:eventId", verify);
 
 module.exports = router;
