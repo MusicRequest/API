@@ -1,5 +1,7 @@
 import * as dotenv from "dotenv";
+// @ts-ignore
 import express from "express";
+// @ts-ignore
 import cors from "cors";
 
 dotenv.config();
