@@ -10,4 +10,4 @@ router.use("/events", eventRouter);
 router.use("/auth", authRouter);
 router.use("/visitors", visitorRouter);
 
-module.exports = router;
+export default router;
