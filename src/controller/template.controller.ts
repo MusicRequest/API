@@ -4,7 +4,10 @@ import logger from "../utils/logger";
 
 const ENTITY = "";
 
-const getAll = async (req: Request, res: Response): Promise<Response> => {
+export const getAll = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
   logger.info(`Récupération de collection (${ENTITY})`);
   try {
     const eventList = await db[ENTITY].findMany({});
@@ -15,7 +18,10 @@ const getAll = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const getById = async (req: Request, res: Response): Promise<Response> => {
+export const getById = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
   if (!req.params.id) return res.sendStatus(400);
   logger.info(`Récupération id:${req.params.id}`);
 
@@ -35,7 +41,7 @@ const getById = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const post = async (req: Request, res: Response) => {
+export const post = async (req: Request, res: Response) => {
   logger.info(`Création de ressouce id:${req.params.id}`);
 
   try {
@@ -52,7 +58,7 @@ const post = async (req: Request, res: Response) => {
   }
 };
 
-const put = async (req: Request, res: Response) => {
+export const put = async (req: Request, res: Response) => {
   logger.info(`Modification de ressouce id:${req.params.id}`);
 
   try {
@@ -72,7 +78,7 @@ const put = async (req: Request, res: Response) => {
   }
 };
 
-const remove = async (req: Request, res: Response) => {
+export const remove = async (req: Request, res: Response) => {
   logger.info(`Suppression de ressouce id:${req.params.id}`);
 
   try {
@@ -87,12 +93,4 @@ const remove = async (req: Request, res: Response) => {
     logger.error("Une erreur c'est produite");
     return res.json({ status: "Une Erreur est survenue" }).status(500);
   }
-};
-
-module.exports = {
-  getAll,
-  getById,
-  post,
-  remove,
-  put,
 };
