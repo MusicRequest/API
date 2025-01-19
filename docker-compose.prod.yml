@@ -1,0 +1,21 @@
+services:
+  back-music:
+    image: back-music
+#    TODO: utiliser une image docker GITHUB
+    build: .
+      - "3000:3000"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-api}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-user}
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+    volumes:
+      - db_data:/var/lib/postgresql/data:rw
+      - ./docker/db/data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+volumes:
+  db_data:
