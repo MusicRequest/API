@@ -37,6 +37,7 @@ model Visitor {
   countVoting  Int
   event        Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId      String
+  socketId     String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
