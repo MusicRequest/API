@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 
 import logger from "../utils/logger";

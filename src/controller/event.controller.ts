@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
 import { db } from "../utils/db.server";
 import logger from "../utils/logger";
+import { Entity } from "../utils/enum";
 
-const ENTITY = "event";
+const ENTITY = Entity.Event;
 
-export const getAll = async (
-  req: Request,
-  res: Response,
-): Promise<Response> => {
+export const getAll = async (req: any, res: Response): Promise<Response> => {
   logger.info("Récupération des évents");
+
   try {
     const eventList = await db[ENTITY].findMany({});
     return res.json(eventList).status(200);

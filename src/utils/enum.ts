@@ -5,6 +5,11 @@ export enum Entity {
 }
 
 export enum ActivityLogsType {
-  User = "user",
-  Music = "music",
+  JoinUser = "join-user",
+  MusicAdd = "music-add",
+  MusicVote = "music-vote",
+}
+
+export enum EmitType {
+  NewActivity = "new-activity",
 }

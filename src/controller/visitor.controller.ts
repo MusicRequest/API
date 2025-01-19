@@ -1,7 +1,9 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { db } from "../utils/db.server";
 import logger from "../utils/logger";
 import { Event, Visitor } from "@prisma/client";
+import createActivityLog from "../helpers/createActivityLog";
+import { ActivityLogsType } from "../utils/enum";
 
 const ENTITY = "visitor";
 
@@ -48,6 +50,16 @@ export const post = async (req: Request, res: Response) => {
   try {
     const visitor = await db[ENTITY].create({
       data: { name, eventId, countVoting: 0 },
+    });
+    console.log(req.io);
+
+    await createActivityLog({
+      io: req.io,
+      message: `${
+        name.charAt(0).toUpperCase() + name.slice(1)
+      } vient de nous rejoindre !`,
+      type: ActivityLogsType.JoinUser,
+      eventId: eventId,
     });
 
     return res.json(visitor).status(201);
